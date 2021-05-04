@@ -2,8 +2,6 @@ package medium.array;
 
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProductOfArrayExceptSelf {
     public static void main(String[] args) {
@@ -12,23 +10,20 @@ public class ProductOfArrayExceptSelf {
     }
 
     public static int[] productExceptSelf(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int product = 1;
-        // 0 - 1, 1 - 1, 2 - 2, 3 - 6
-        for (int i = 0; i < nums.length; i++) {
-            product *= i - 1 < 0 ? 1 : nums[i - 1];
-            map.put(i, product);
+        int[] productArray = new int[nums.length];
+        productArray[0] = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+            productArray[i] = nums[i - 1] * productArray[i - 1];
         }
 
-        product = 1;
-        int[] result = new int[nums.length];
-        // 3 - 6, 2 - 2 * 4 = 8, 1 - 1 * 12 = 12, 0 - 1 * 24 = 24
+        int product = 1;
         for (int i = nums.length - 1; i >= 0 ; i--) {
-            result[i] = map.get(i) * product;
+            productArray[i] *= product;
             product *= nums[i];
         }
 
-        return result;
+        return productArray;
     }
 
 }
