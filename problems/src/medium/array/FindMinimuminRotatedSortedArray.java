@@ -7,15 +7,16 @@ public class FindMinimuminRotatedSortedArray {
         System.out.println(findMin(new int[]{11,13,15,17})); //11
     }
 
+    /**
+     * O(n) solution
+     */
     public static int findMin(int[] nums) {
         int res = nums[0];
-
         for (int i = 1; i < nums.length; i++) {
             if (res > nums[i]) {
                 return nums[i];
             }
         }
-
         return res;
     }
 }
