@@ -8,15 +8,38 @@ public class FindMinimuminRotatedSortedArray {
     }
 
     /**
-     * O(n) solution
+     * O(log n) solution
      */
     public static int findMin(int[] nums) {
-        int res = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            if (res > nums[i]) {
-                return nums[i];
+        int start = 0;
+        int end = nums.length - 1;
+
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        if (nums[end] > nums[start]) {
+            return nums[start];
+        }
+
+        while (end >= start) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] > nums[mid + 1]) {
+                return nums[mid + 1];
+            }
+
+            if (nums[mid - 1] > nums[mid]) {
+                return nums[mid];
+            }
+
+            if (nums[mid] > nums[0]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
-        return res;
+
+        return -1;
     }
 }
