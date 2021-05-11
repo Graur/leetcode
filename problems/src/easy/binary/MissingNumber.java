@@ -7,16 +7,13 @@ public class MissingNumber {
         System.out.println(missingNumber(new int[] {9,6,4,2,3,5,7,0,1})); //8
     }
 
-
+    /**
+     * Gauss' Formula
+     */
     public static int missingNumber(int[] nums) {
-        int length = nums.length;
-        int sum = 0;
-        int realSum = 0;
-        for (int i = 0; i < length; i++) {
-            sum+=i + 1;
-            realSum+= nums[i];
-        }
-
-        return sum - realSum;
+        int expectedSum = nums.length*(nums.length + 1)/2;
+        int actualSum = 0;
+        for (int num : nums) actualSum += num;
+        return expectedSum - actualSum;
     }
 }
